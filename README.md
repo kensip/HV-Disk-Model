@@ -14,7 +14,7 @@ You will need IDL installed on your computer, with a working license, to run thi
 Download all files included above. No other IDL astronomy software is required to run this code--- I have included copies of any strictly necessary IDL astronomy software in this repository (authors of these software are noted within files). All files except fitplotprof_single.pro, plotdisk.pro, convertidltotxt.pro, and pythondiskplots.ipynb are part of the simulation itself. Those latter files will be used to export the model pulse profiles to a Python-readable format, plot pulse profiles and/or the disk in IDL, export the accretion disk plots to a Python-readable format, and plot the accretion disk geometry in Python, respectively.
 
 # Generating the Blackbody Fraction File
-Before running the model, we must generate an array that contains the fraction of the total blackbody radiation is emitted within a given energy band (columns), if the source has a given temperature (rows). The file bbfrac.pro generates this grid of values, which is then interpolated upon to ultimately calculate the intensity of reprocessed emission from the accretion disk.
+Before running the model for the first time, we must generate an array that contains the fraction of the total blackbody radiation is emitted within a given energy band (columns), if the source has a given temperature (rows). The file bbfrac.pro generates this grid of values, which is then interpolated upon to ultimately calculate the intensity of reprocessed emission from the accretion disk.
 
 Open the file bbfrac.pro and set the following:
 1. The name of the output file ('fname')
@@ -27,6 +27,8 @@ Then compile and run this procedure, with your desired minimum and maximum energ
 ```bbfrac(elo,ehi,T) ```
 
 Now go into the file dtmpspec.pro and replace the variable 'bbfracgrid' with the path to the file you just generated. Save dtmpspec.pro before proceeding.
+
+This step does not need to be repeated for subsequent model runs, unless you are changing the energy limits you desire in your model pulse profiles.
 
 # Setting Model Parameters
 All parameters are set via the fit_inp.pro file. The accretion column parameters are called 'beam' parameters throughout. All angles should be inputted in degrees.
