@@ -80,7 +80,7 @@ The information needed to plot the disk is stored in the 'diskplotpar_0.000.idl'
 ```.run convertidltotxt.pro```
 
 Then, use the Python notebook included to plot the disk. Within this file, be sure to change:
-1. The path to your params.txt file, which lists all the simulations you have run. It is overwritten every time you run fit_inp.pro, so for a large batch of simulations it is best to run them all at once and save a copy of the resulting params.txt elsewhere. For running simulations in smaller batches, you could also copy-paste the new params.txt file content into another .txt file each time you run, accumulating the information for all your simulations.
+1. The path to your params.txt file, which lists all the simulations you have run. It is overwritten every time you run fit_inp.pro, so for a large batch of simulations it is best to run them all at once and save a copy of the resulting params.txt elsewhere. 
 2. Your desired save location/ save file name for plots. It will need to be changed twice, once in the segment of code for plotting all disk positions, and again in the segment of code for plotting just one disk position.
 3. The observer elevation, if yours is not $20^o$. This should be changed in the variable 'foldername'.
 
