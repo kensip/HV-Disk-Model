@@ -15,7 +15,7 @@ spawn,'mkdir '+topdir ;if the directory already exists, this should just fail/ w
 ;this selects whether or not we'll use a fan or pencil beam
 fan='n'
 
-;These are the FAN BEAM properties ;the way it's set up now we can only have fan OR pencil beams, not both, tho in principle seems fairly easy to change it to both
+;These are the FAN BEAM properties
 ;disk properties
 if fan eq 'y' then begin
 rin=0.8 ;inner disk radius = magnetosphere radius 
