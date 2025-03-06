@@ -50,11 +50,9 @@ obselevdeg=[20.] ;observer elevation off the normal plane in degrees
 sigma1=60. ; width of beam 1 (used to be radians, I changed it to deg here & put in a line to convert in beam.pro)
 sigma2=60. ; width of beam 2
 long1=0. ;longitude position of beam 1 (set to 0)
-; long2vdeg=[180.] ;longitude position of beam 2, relative to beam 1
-long2vdeg=[160.,170.,180.] ;other value used in Brumback+20 for SMCX1
+long2vdeg=[160.,170.,180.] ;longitude position of beam 2, relative to beam 1
 thvdeg=0. ;opening angle (pencil beam is always 0)
-; beamangdeg1=[60.] ;latitude angle of beam 1 (degrees)
-beamangdeg1=[-50.,-40.,40.,50.,60.] ;other value used in Brumback+20 for SMCX1
+beamangdeg1=[-50.,-40.,40.,50.,60.] ;latitude angle of beam 1 (degrees)
 beamangdeg2=[50.,60.,70.] ;latitude angle of beam 2 (degrees), NOT relative to beam 1 
 endelse
 
