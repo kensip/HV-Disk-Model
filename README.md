@@ -3,7 +3,7 @@
 This is a geometric model representing a warped, precessing accretion disk around an X-ray pulsar. It has been successfully used to reproduce the energy-resolved pulse profiles of SMC X-1, Her X-1, and LMC X-4.
 
 The code was originally developed by Ryan C. Hickox and presented in Hickox & Vrtilek (2005). This paper describes many features of the model and can be found here: https://iopscience.iop.org/article/10.1086/491596 .
-Further information on the model can also be found in Brumback et al. (2020) and Sippy et al. (in prep). All code was authored by Ryan C. Hickox, with the exception of fitplotprof_single.pro which was added by McKinley C. Brumback, and convertidltotxt.pro and pythondiskplots.ipynb which were added by Kendall I. Sippy.
+Further information on the model can also be found in Brumback et al. (2020) and Sippy et al. (in prep).
 
 This is the first version of this model that is publicly available, with documentation written by Kendall I. Sippy. 
 
@@ -11,7 +11,7 @@ This is the first version of this model that is publicly available, with documen
 
 You will need IDL installed on your computer, with a working license, to run this code. There are future plans to translate the model into Python to make it more accessible.
 
-Download all files included above. No other IDL astronomy software is required to run this code--- I have included copies of any strictly necessary IDL astronomy software in this repository, and modified the code to eliminate others. All files except fitplotprof_single, convertidltotxt.pro, and pythondiskplots.ipynb are part of the simulation itself. Those latter files will be used to export the model pulse profiles to a Python-readable format, export the accretion disk plots to a Python-readable format, and plot the accretion disk geometry in Python, respectively.
+Download all files included above. No other IDL astronomy software is required to run this code--- I have included copies of any strictly necessary IDL astronomy software in this repository (authors of these software are noted within files). All files except fitplotprof_single.pro, plotdisk.pro, convertidltotxt.pro, and pythondiskplots.ipynb are part of the simulation itself. Those latter files will be used to export the model pulse profiles to a Python-readable format, plot pulse profiles and/or the disk in IDL, export the accretion disk plots to a Python-readable format, and plot the accretion disk geometry in Python, respectively.
 
 # Generating the Blackbody Fraction File
 Before running the model, we must generate an array that contains the fraction of the total blackbody radiation is emitted within a given energy band (columns), if the source has a given temperature (rows). The file bbfrac.pro generates this grid of values, which is then interpolated upon to ultimately calculate the intensity of reprocessed emission from the accretion disk.
@@ -49,4 +49,26 @@ Save the file, then compile and run this procedure using the following script:
 ``` .run fit_inp.pro```
 
 # Running the Simulation
-The simulation is run via the fit_run.pro file. The model parameters must already be set (via compiling and running fit_inp.pro within the same IDL session) before running this file.
+The simulation is run via the fit_run.pro file. The model parameters must already be set (via compiling and running fit_inp.pro within the same IDL session) before running this file. Run as follows:
+
+``` .compile fit_run.pro ```
+
+``` .run fit_run.pro ```
+
+The fit_run.pro file will run simulations for all parameter combinations that haven't been previously run. The parameters it considers in this determination are only those included in the automatically generated folder names for simulations, i.e. the beam opening angle, the _variable_ parameters I described above, and the observer elevation. If you are changing other parameters besides these, I recommend creating a new directory for those simulation outputs (and changing the output directory accordingly in fit_inp.pro). 
+
+If you have elected to plot the accretion disk geometry in IDL, the simulation will pause as it shows you each plot, and you will need to direct it to continue by typing:
+
+``` .cont ```
+
+If IDL is terminated while running a simulation: before starting again be sure to go into the folder of the simulation that was partially completed, and delete the file 'diskbeam.idl'. The existence of this file in a given folder is how fit_run.pro determines whether the simulation has been run already, so it will leave the simulation incomplete otherwise.
+
+If you wish to re-run a particular simulation: go into the folder and delete the 'diskbeam.idl' file, then run fit_run.pro as usual. Alternatively, you can go into fit_run.pro and comment out the line defining 'dlist', and instead just define it as a particular folder or a list of folders.
+
+If you wish to re-run all simulations: go into fit_run.pro and comment out the line that defines 'ranalready', and comment in the line below that says 'ranalready='''. This will now re-run all simulations in your folder.
+
+# Plotting Pulse Profiles in Python
+The file fitplotprof_single.pro generates a .csv file of the hard and soft X-ray model pulse profile at each disk phase (8 pulse profiles total per model run). These files are outputted into each model folder, under the sub-folders 'diskphi_0.000', 'diskphi_0.125', etc. They can be plotted in Python as any .csv file and compared to data.
+
+# Plotting the Disk in Python
+The information needed to plot the disk is stored in the 'diskplotpar_0.000.idl', 'diskplotpar_0.125.idl', etc. files within each model folder (8 files per model). These can be converted to a csv format that is readable to Python using convertidltotxt.pro. 
