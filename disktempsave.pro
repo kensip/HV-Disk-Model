@@ -87,8 +87,6 @@ save,ph,illum,xv,yv,zv,labs,T,side,filename=bdir+'dtemp_'+`${j,'%3.3I'}`+'.idl'
 lemitv[j]=lemit ;set each value of lemitv (for each increment of beam rotation) to be whatever was outputting running disktemp
 ;disktemp is going to be run once for each beam rotation segement, assuming the disk is effectively stationary on the timescale of the beam rotation
 
-print,'phi='+string(phbeam[iang[j]]) ;print what beam phi we're at rn
-
 j=j+1 ;now add one to this index
 
     if j eq nang then goto,endit ;if we've gone through all of the angle increments, then go to the end of the program
