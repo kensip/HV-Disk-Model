@@ -29,7 +29,7 @@ Then compile and run this procedure, with your desired minimum and maximum energ
 Now go into the file dtmpspec.pro and replace the variable 'bbfracgrid' with the path to the file you just generated. Save dtmpspec.pro before proceeding.
 
 # Setting Model Parameters
-All parameters are set via the fit_inp.pro file. The accretion column parameters are called 'beam' parameters throughout.
+All parameters are set via the fit_inp.pro file. The accretion column parameters are called 'beam' parameters throughout. All angles should be inputted in degrees.
 
 Open the file fit_inp.pro and set the following:
 1. The name of the output folder for all model output ('topdir')
