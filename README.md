@@ -17,6 +17,15 @@ Download all files included above. No other IDL astronomy software is required t
 All parameters are set via the fit_inp.pro file. Be sure to change the 'topdir' (where you want model output files to save) before running. All model parameters are set by typing their values into this file. Note that there are different blocks of code to set parameters for fan or pencil beam settings, so be sure you enter the parameters in the correct section for the type of simulation you wish to run.
 
 # Generating the Blackbody Fraction File
+Open the file bbfrac.pro and set the following:
+1. The name of the output file ('fname')
+2. The folder the output file will go to ('ftop')
+
+Then run this procedure, with your desired minimum and maximum energy (the lowest energy of your soft X-ray bin, and the highest energy of your hard X-ray bin), and any temperature between $10^4 \, K$ and $10^8 \, K$. Compile the bbfrac.pro file and then run the functino using the following script:
+
+``` bbfrac(elo,ehi,T) ```
+
+Now go into the file dtmpspec.pro and replace the variable 'bbfracgrid' with the path to the file you just generated.
 
 # Running the Simulation
 The simulation is run via the fit_run.pro file. The model parameters must already be set (via running fit_inp.pro within the same IDL session) before running this file.
