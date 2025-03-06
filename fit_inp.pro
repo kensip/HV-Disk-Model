@@ -37,7 +37,7 @@ beamangdeg2=[70.] ;likewise for beam 2 (degrees), NOT relative to beam 1
 ;beamangdeg's take negative values as well
 endif else begin ;can put these all on one line, indentation and orientation don't really matter, just order
 
-;These are the PENCIL BEAM properties -- set to literature values for SMC X-1 (Brumback et al. 2020)
+;These are the PENCIL BEAM properties
 ;disk properties
 rin=0.8 ; radius of inner disk = magnetosphere radius (units of 10^8 cm)
 rout=1. ;radius of outer disk
