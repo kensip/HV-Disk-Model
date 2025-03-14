@@ -46,8 +46,8 @@ if r eq '' then begin
     en=10.^loge ;same as T but for the energies
     energ=en*keV ;now converting the energies from keV to ergs
 
-    endiff=diff(energ) ;diff is a command that no longer exists in IDL, but from context clues it is meant to be the difference between each point (like a dE)
-
+    endiff=diff(energ) ;same idea as np.diff
+    
     ix=where(en ge enlo and en lt enhi) ;indices of elements in en that have energies between the limits (enlo and enhi)
 
     bbfracv=dblarr(n_elements(Tv)) ;double precision array of float zeros with same size as the list of temperatures, Tv (which has the same size as logT)
@@ -56,9 +56,9 @@ if r eq '' then begin
     for i=0,n_elements(Tv)-1 do begin ;for each temperature
 
         spec=bbnorm(Tv[i],energ)
-        ;in any case, must be taking the SED of a normalized blackbody curve at the given temperature, at all the energies (analogous to wavelengths) in the list 
+        ;taking the SED of a normalized blackbody curve at the given temperature, at all the energies (analogous to wavelengths) in the list 
         ; 
-    spectot=total(spec[0:n_elements(spec)-2]*endiff) ;ohh i think endiff is like a dE between the energies. and then this is a rough integral of like flux over the energy range to get total flux
+    spectot=total(spec[0:n_elements(spec)-2]*endiff) ;this is a rough integral of like flux over the energy range to get total flux
     specx=total(spec[ix]*endiff[ix]) ;same idea as line above, but now this is the total integrated flux for Just energies between enlo and enhi
 
         bbfracv[i]=specx/spectot ;this is what fraction of the total flux is contained between enlo and enhi
