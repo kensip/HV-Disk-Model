@@ -65,7 +65,7 @@ If you have elected to plot the accretion disk geometry in IDL, the simulation w
 
 ```.cont ```
 
-If IDL is terminated while running a simulation: before starting again be sure to go into the folder of the simulation that was partially completed, and delete the file 'diskbeam.idl'. The existence of this file in a given folder is how fit_run.pro determines whether the simulation has been run already, so it will leave the simulation incomplete otherwise.
+If IDL is terminated while running a simulation: before starting again be sure to go into the folder of the simulation that was partially completed, and delete the file 'diskbeam.idl'. The existence of this file in a given folder (with its particular parameters in the folder name) is how fit_run.pro determines whether the simulation has been run already, so it will leave that simulation incomplete unless you delete this file. Then restart IDL, and compile and run fit_inp.pro and fit_run.pro again as usual.
 
 If you wish to re-run a particular simulation: go into the folder and delete the 'diskbeam.idl' file, then run fit_run.pro as usual. Alternatively, you can go into fit_run.pro and comment out the line defining 'dlist', and instead just define it as a particular folder or a list of folders.
 
