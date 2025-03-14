@@ -79,7 +79,6 @@ disktemp,params,npoints,nprof,rinphys,thbeam,phbeam,illum,ph,xv,yv,zv,labs,T,sid
 
 ;xv, yv, zv were defined in 'beam' procedure
 ;rest not seen here should be defined within the disktemp procedure
-; save,ph,illum,xv,yv,zv,labs,T,side,filename=bdir+'dtemp_'+`${j,'%3.3I'}`+'.idl'
 save,ph,illum,xv,yv,zv,labs,T,side,filename=bdir+'dtemp_'+`${j,'%3.3I'}`+'.idl'
 ;saving some variables resulting from the running of 'disktemp' to another file, named after the interval of beam rotation that we're on rn
 
@@ -103,7 +102,7 @@ openw, lun, bdir+'lemit.csv'
 ndat = n_elements(lemitv)
 for j=0,ndat-1 do begin
 	printf, lun, string(j) + ',' + string(lemitv[j])
-		;print into the file, 'disk phase', 'normalized brightness of the star', 'normalized brightness of the disk
+		;print into the file, 'disk phase', 'normalized brightness of the star', 'normalized brightness of the disk'
 endfor    
 free_lun, lun
 close, lun
