@@ -85,7 +85,7 @@ zv2=zv
 
 ;fill in the x y and z vectors
 for i=0,nth-1 do begin ;for each step
-    xv[i,*]=rv*cos(vphi)*cos(vth[i]) ;definning the x component of the beam profile everywhere on the beam prof. grid (defn of x relate to spherical polar coords)
+    xv[i,*]=rv*cos(vphi)*cos(vth[i]) ;defining the x component of the beam profile everywhere on the beam prof. grid (defn of x relate to spherical polar coords)
     yv[i,*]=rv*sin(vphi)*cos(vth[i]) ;likewise for the y component of the beam
     zv[i,*]=rv*sin(vth[i]) ;likewise for the z component of the beam
 
