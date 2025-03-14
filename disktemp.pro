@@ -10,7 +10,6 @@ kpc242=9.523 ; value of 1 kpc^2 in units of 10^{42} cm^2
 k=1.3807E-16 ;the boltzmann constant (k from kT), in cm2 g s-2 K  (CGS)
 SBsigma=5.6705E-5 ;stefan-boltzmann constant in erg⋅cm−2⋅s−1⋅K−4 (CGS units)
 keV=1.6021E-9 ;value of 1 keV in ergs
-;L38=illum
 
 ;the top value for the color index
 ctop=255. ;also defined in beam.pro
@@ -67,7 +66,7 @@ for i=0,npoints-1 do begin
     ;so they will only count up or down in value as we move radially out from the inner to outer disk, and then will reset for the next phi
 
     ;determine the bounds in phi of this particular piece of the disk
-    case i of ;this is like a super annoying if then statement
+    case i of ;this is like an if then statement
         0: inds=[npoints-1,1] ; if i=0, set inds to be an array like [99,1]
         npoints-1: inds=[npoints-2,0] ; if i=99, set inds to be [98,0]
         else: inds=[i-1,i+1] ;otherwise, set inds to be this (for example if i=2, inds=[1,3])
@@ -108,7 +107,7 @@ for i=0,npoints-1 do begin
                       cos(ang[i])) 
         ;(2.*!pi*phistep[i]) is the increments of phi counting up around the disk, converted to radians, so this is like delta phi
         ;(ang[i,jnds[1]]-ang[i,jnds[0]]) is subtracting the tilt angle value for the given phi BEFORE the current (jth) one from the one AFTER the current (jth)
-        ; so this ^^ is kind of like a delta for that angle... alpha let's say, basically
+        ; so this ^^ is kind of like a delta for that angle... alpha let's say
         ; so the whole thing is cos(alpha)*delta(alpha)*delta(phi), which is the integral of a solid angle (tho using the tilt angle b4 and after makes it rough)
         ; i.e. dOmega = sin(theta) dtheta dphi
         ; 
@@ -141,7 +140,7 @@ for i=0,npoints-1 do begin
             vec2[2]=zv[inds[1],j]-zv[inds[0],j]   
 
             orient=crossp(vec1,vec2) ;the crossproduct of these two vectors gives us the rough area of a little square around our current disk position
-            ;we recall that the crossproduct magnitude is equal to the area of a parallelogram with sides = the vectors!!!!
+            ;we recall that the crossproduct magnitude is equal to the area of a parallelogram with sides = the vectors
         ;this is an estimate of the area
         ;note we include the physical size of the region here
             area=rinphys^2.*sqrt(orient[0]^2.+orient[1]^2.+orient[2]^2.) ;now applying the correction for r into physical units (into cm)
@@ -149,7 +148,7 @@ for i=0,npoints-1 do begin
 
             T[i,j]=(1.E38)^(1./4.)*(labs[i,j]/(SBsigma*area))^(1./4.) ; sigma T^4 = F << Stefan-Boltzmann law
             ;where F = L/A = dE/dAdt
-            ;so this is that same equation rearranged to solve for T, and also correcting luminosity (labs) into 10^{38} erg/s bc before it was divided by that or something
+            ;so this is that same equation rearranged to solve for T, and also correcting luminosity (labs) into 10^{38} erg/s
 
         endif
         
