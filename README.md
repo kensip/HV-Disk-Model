@@ -44,7 +44,7 @@ Open the file fit_inp.pro and set the following:
 6. Variable disk parameters--- the inner tilt angle ('tiltindeg'), outer tilt angle ('tiltoutdeg'), and twist angle/ phase offset between the inner and outer disk ('phsoffvdeg'). These can be set to multiple values or a single value, as with the beam parameters.
 7. Other parameters--- for a general analysis, these parameters may be held at the prescribed values, but they can also be varied if the user desires. These are: the inner ('rin') and outer radii ('rout') of the accretion disk, given in units of $10^8$ cm, the beam widths ('sigma1' and 'sigma2'), the opening angle of the fan beam ('thvdeg', the opening angle of the pencil beam should be kept at 0), and the ratio of the beam luminosities to the constant non-pulsating luminosity ('norm1' and 'norm2'). See Hickox & Vrtilek (2005) for justification of the standard values for these variables.
 
-Note that there are different blocks of code to set variable disk and beam parameters for fan or pencil beam geometries, so be sure you enter the disk and beam parameters in the correct section for the type of simulation you wish to run.
+Note that there are different blocks of code to set variable parameters for fan vs. pencil beam geometries, so be sure you enter the disk and beam parameters in the correct section for the type of simulation you wish to run.
 
 Save the file, then compile and run this procedure using the following script:
 
