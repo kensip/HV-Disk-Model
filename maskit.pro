@@ -7,8 +7,7 @@ function maskit,nprof,nang,xv2,yv2,zv2
 ;likewise for others
 
 xsrt=sort(-xv2) ;this tells us the INDICES of the elements in xv2 in order from lowest to highest-- but by putting the negative here they're now being sorted highest to lowest effectively
-;so this is NOT an array of actual values from xv2, it's a list of the indices that you would have to call from xv2 to get the values of xv2 in order
-;and this was a 2D array--- 'sort' sorts ALL the values in every row + column, and gives them a list of 1D indices
+; and this was a 2D array--- 'sort' sorts ALL the values in every row + column, and gives them a list of 1D indices
 ; like instead of the first column being [0:8,0], it's [0:8], and the second column is no longer [0:8,1], it's now [9:16], etc.
 ysrt=sort(yv2) ;likewise
 zsrt=sort(zv2)
@@ -23,7 +22,7 @@ ixv=xsrt-nang*jxv ;if we didn't do the 'fix' step above, this would be equal to 
 ;but importantly both jxv and ixv are long, 1D lists of numbers that tell us the original coordinates of the points, now sorted
 ;so if we hadn't sorted the things at all, jxv would look like [0,0,0,0,0,0,0,0,1,1,1, etc.]
 
-bdone=intarr(nang,nprof) ;array of integer zeros with dimensions of disk phis by disk radii (so like 8 x 100 or something)
+bdone=intarr(nang,nprof) ;array of integer zeros with dimensions of disk phis by disk radii (so like 8 x 100)
 iplot=1+intarr(nang,nprof) ;now it's an array of integer 1's
 
 for j1=0,nprof-1 do begin ;for each disk radius
@@ -31,7 +30,7 @@ for j1=0,nprof-1 do begin ;for each disk radius
     for i1=0,nang-1 do begin ;for each disk phi
     ;see if we've already flagged this one
 
-    ii=i1+nang*j1 ;so now we're taking ixv and jxv (which were a reverse-engineering of the original indices), and reverse-reverse-engineering the New indices (those we need for xsrt, etc.)
+    ii=i1+nang*j1 ;so now we're taking ixv and jxv (which were a reverse-engineering of the original indices), and reverse-reverse-engineering the new indices (those we need for xsrt, etc.)
     ix=ixv[ii] ;this tells us the original disk phi/ row coordinate of a given tilt angle in xv2
     jx=jxv[ii] ;likewise for the disk radius index
 
@@ -79,7 +78,7 @@ for j1=0,nprof-1 do begin ;for each disk radius
     ;the above are representing the y and z values of points in a little square area around our current point
 
     ;find the points covered by the points you're looking at
-    ib=where(bdone ne 1 and yv2 ge min(cy) and yv2 le max(cy) $ ;so if yv2 is between the min and max of cy (has the potential to be clocking this point in the y dimension)
+    ib=where(bdone ne 1 and yv2 ge min(cy) and yv2 le max(cy) $ ;so if yv2 is between the min and max of cy (has the potential to be blocking this point in the y dimension)
              and zv2 ge min(cz) and zv2 le max(cz)) ;likewise for z's
              ;and also make sure bdone isn't already =1, which shouldn't be the case given conditions above, but just to be safe
              ;ib saves the indices of values where this is true
@@ -105,11 +104,11 @@ for j1=0,nprof-1 do begin ;for each disk radius
 goto,noplot ;skip over the lines below that are plotting stuff
 
         myplot =plot([cy,cy[0]],[cz,cz[0]]);color=clr1
-        over = scatterplot([1.,1.]*yv2[xsrt[ii]],[1.,1.]*zv2[xsrt[ii]],/OVERPLOT,SYMBOL="*",SYM_SIZE=2.0);psym=3,color=clr2
-        over2 =scatterplot(yv2[ib],zv2[ib],/OVERPLOT,SYMBOL="*",SYM_SIZE=1.0);psym=2
+        over = scatterplot([1.,1.]*yv2[xsrt[ii]],[1.,1.]*zv2[xsrt[ii]],/OVERPLOT,SYMBOL="*",SYM_SIZE=2.0)
+        over2 =scatterplot(yv2[ib],zv2[ib],/OVERPLOT,SYMBOL="*",SYM_SIZE=1.0)
 
         if ib2[0] gt -1 then begin ;if there are points in ib2 (if any of the points are hidden)
-            over3 =scatterplot(yv2[ib[ib2]],zv2[ib[ib2]],/OVERPLOT,SYMBOL="+",SYM_SIZE+1.0);color=clr3,psym=2
+            over3 =scatterplot(yv2[ib[ib2]],zv2[ib[ib2]],/OVERPLOT,SYMBOL="+",SYM_SIZE+1.0)
         endif
 
         stop
