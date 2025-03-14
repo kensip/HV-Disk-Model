@@ -13,10 +13,10 @@ You will need IDL installed on your computer, with a working license, to run thi
 
 Download all files included above. No other IDL astronomy software is required to run this code--- I have included copies of any strictly necessary IDL astronomy software in this repository (authors of these software are noted within files). 
 
-All files except fitplotprof_single.pro, plotdisk.pro, convertidltotxt.pro, and pythondiskplots.ipynb are part of the simulation itself. Those latter files will be used to export the model pulse profiles to a Python-readable format, plot pulse profiles and/or the disk in IDL, export the accretion disk plots to a Python-readable format, and plot the accretion disk geometry in Python, respectively.
+All files except fitplotprof_single.pro, plotdisk.pro, convertidltotxt.pro, and pythondiskplots.ipynb are part of the simulation itself. Those latter files will be used to plot the pulse profiles in IDL and export the model pulse profiles to a Python-readable format, plot the disk in IDL, export the accretion disk plots to a Python-readable format, and plot the accretion disk geometry in Python, respectively.
 
 # Generating the Blackbody Fraction File
-Before running the model for the first time, we must generate an array that contains the fraction of the total blackbody radiation is emitted within a given energy band (columns), if the source has a given temperature (rows). The file bbfrac.pro generates this grid of values, which is then interpolated upon to ultimately calculate the intensity of reprocessed emission from the accretion disk.
+Before running the model for the first time, you will need to generate an array that contains the fraction of the total blackbody radiation is emitted within a given energy band (rows), if the source has a given temperature (columns). The file bbfrac.pro generates this grid of values, which is then interpolated upon to ultimately calculate the intensity of reprocessed emission from the accretion disk.
 
 Open the file bbfrac.pro and set the following:
 1. The name of the output file ('fname')
@@ -24,7 +24,7 @@ Open the file bbfrac.pro and set the following:
 
 Then compile and run this procedure, with your desired minimum and maximum energy (the lowest energy of your soft X-ray bin, and the highest energy of your hard X-ray bin), and any temperature between $10^4$ K and $10^8$ K. Compile the bbfrac.pro file and then run the function using the following script:
 
-<.compile bbfrac.pro>
+```.compile bbfrac.pro```
 
 ```bbfrac(elo,ehi,T) ```
 
@@ -38,7 +38,7 @@ All parameters are set via the fit_inp.pro file. The accretion column parameters
 Open the file fit_inp.pro and set the following:
 1. The name of the output folder for all model output ('topdir')
 2. Fan or pencil beam--- set the variable 'fan' to be either 'y' or 'n'.
-3. Plotting the pulse profiles and disk in IDL (or not)--- set 'plotd' and 'plotpps' to 'y' or 'n' accordingly. I find it is most helpful to see the plots in IDL if you are just doing one simulation at a time or are new to the model.
+3. Plotting the pulse profiles and disk in IDL (or not)--- set 'plotd' and 'plotpps' to 'y' or 'n' accordingly. It may helpful to see the plots in IDL if you are doing one simulation at a time or are new to the model. Data will be exported into a Python-readable form regardless of if these are run.
 4. Constant parameters--- the observer elevation ('obselevdeg') and source luminosity ('lum38', in units of $10^{38}$ erg/s) should be set to constants according to the source you are modeling.
 5. Variable beam parameters--- the latitude of beam 1 ('beamangdeg1') and beam 2 ('beamangdeg2'), longitude of beam 2 relative to beam 1 ('long2vdeg', beam 1 longitude is always set to 0). These intrinsically allow for dipolar or non-dipolar accretion column orientations. Set to one value, or an array of several values. Be sure to avoid setting them to integers; always type '20.' rather than '20'.
 6. Variable disk parameters--- the inner tilt angle ('tiltindeg'), outer tilt angle ('tiltoutdeg'), and twist angle/ phase offset between the inner and outer disk ('phsoffvdeg'). These can be set to multiple values or a single value, as with the beam parameters.
