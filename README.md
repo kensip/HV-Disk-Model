@@ -11,7 +11,9 @@ This is the first version of this model that is publicly available, with documen
 
 You will need IDL installed on your computer, with a working license, to run this code. There are future plans to translate the model into Python to make it more accessible.
 
-Download all files included above. No other IDL astronomy software is required to run this code--- I have included copies of any strictly necessary IDL astronomy software in this repository (authors of these software are noted within files). All files except fitplotprof_single.pro, plotdisk.pro, convertidltotxt.pro, and pythondiskplots.ipynb are part of the simulation itself. Those latter files will be used to export the model pulse profiles to a Python-readable format, plot pulse profiles and/or the disk in IDL, export the accretion disk plots to a Python-readable format, and plot the accretion disk geometry in Python, respectively.
+Download all files included above. No other IDL astronomy software is required to run this code--- I have included copies of any strictly necessary IDL astronomy software in this repository (authors of these software are noted within files). 
+
+All files except fitplotprof_single.pro, plotdisk.pro, convertidltotxt.pro, and pythondiskplots.ipynb are part of the simulation itself. Those latter files will be used to export the model pulse profiles to a Python-readable format, plot pulse profiles and/or the disk in IDL, export the accretion disk plots to a Python-readable format, and plot the accretion disk geometry in Python, respectively.
 
 # Generating the Blackbody Fraction File
 Before running the model for the first time, we must generate an array that contains the fraction of the total blackbody radiation is emitted within a given energy band (columns), if the source has a given temperature (rows). The file bbfrac.pro generates this grid of values, which is then interpolated upon to ultimately calculate the intensity of reprocessed emission from the accretion disk.
@@ -22,7 +24,7 @@ Open the file bbfrac.pro and set the following:
 
 Then compile and run this procedure, with your desired minimum and maximum energy (the lowest energy of your soft X-ray bin, and the highest energy of your hard X-ray bin), and any temperature between $10^4$ K and $10^8$ K. Compile the bbfrac.pro file and then run the function using the following script:
 
-```.compile bbfrac.pro```
+<.compile bbfrac.pro>
 
 ```bbfrac(elo,ehi,T) ```
 
