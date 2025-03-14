@@ -60,7 +60,7 @@ for k=0,ntemps-1 do begin ;for each of the beam rotation increments/ resulting t
     restore,bdir+'dtemp_'+`${k,'%3.3I'}`+'.idl' ;restore the temperature profile info saved in all these many files
     ;including parameters: ph,illum,xv,yv,zv,labs,T,side
     
-    Tmin1=min(T[where(T gt 0.)]) ;set Tmin1 to be the lowest positive T value (was there some error where they were getting negative T values???)
+    Tmin1=min(T[where(T gt 0.)]) ;set Tmin1 to be the lowest positive T value
     
     Tmax1=max(T) ;set Tmax1 to be the highest T value
     
