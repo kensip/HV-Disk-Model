@@ -28,7 +28,7 @@ Then compile and run this procedure, with your desired minimum and maximum energ
 
 ```bbfrac(elo,ehi,T) ```
 
-Now go into the file dtmpspec.pro and replace the variable 'bbfracgrid' with the path to the file you just generated. Save dtmpspec.pro before proceeding.
+Now go into the file dtmpspec.pro and replace the variable 'bbfracgrid' with the path to the file you just generated. Save dtmpspec.pro before proceeding. You can also change the lower and upper energy limits desginated for the soft X-ray portion of the model's pulse profile (radiation from the disk) by changing the variables 'xlo' and 'xhi' in dtmpspec.pro--- they are set at 0.3 keV and 1 keV by default.
 
 This step does not need to be repeated for subsequent model runs, unless you are changing the energy limits you desire in your model pulse profiles.
 
