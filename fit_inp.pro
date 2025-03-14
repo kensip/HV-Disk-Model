@@ -19,7 +19,7 @@ fan='y'
 plotd = 'y'
 plotpps = 'y'
 
-;These are the FAN BEAM properties ;the way it's set up now we can only have fan OR pencil beams, not both, tho in principle seems fairly easy to change it to both
+;These are the FAN BEAM properties ;the way it's set up now we can only have fan OR pencil beams
 ;disk properties
 if fan eq 'y' then begin
 rin=0.8 ;inner disk radius = magnetosphere radius, in units of 1e+8 cm
@@ -35,13 +35,13 @@ sigma2=30. ;width of beam 1 (degrees)
 sigma1=30. ;width of beam 2
 long1=0. ;longitude of beam 1 (set to zero and then make beam 2 relative to this)
 long2vdeg=[180.] ;longitude of beam 2 (degrees) relative to beam 1
-thvdeg=[30.] ;opening angle (the fan beam is wide-- must be >45 degrees per HV05, for pencil beam this is always 0) (degrees)... but B+20 uses 30 so ok
+thvdeg=[30.] ;opening angle (the fan beam is wide, for pencil beam this is always 0) (degrees)
 beamangdeg1=[-40.] ;latitude angle for beam 1 (degrees), to define its position along w the longitude
 beamangdeg2=[70.] ;likewise for beam 2 (degrees), NOT relative to beam 1
 ;beamangdeg's take negative values as well
-endif else begin ;can put these all on one line, indentation and orientation don't really matter, just order
+endif else begin ;can put these all on one line in IDL, indentation and orientation don't really matter, just order
 
-;These are the PENCIL BEAM properties -- set to literature values for SMC X-1 (Brumback et al. 2020)
+;These are the PENCIL BEAM properties
 ;disk properties
 rin=0.8 ; radius of inner disk = magnetosphere radius (units of 10^8 cm)
 rout=1. ;radius of outer disk
@@ -72,12 +72,11 @@ nth=npoints
 nphi=npoints 
 
 ;beam rotation angles
-;tweaking this to see if it gives me higher resolution simulated pulse profiles
 nang=128. ; rotating the beams around in 128 increments
 
 
 rinphys=1.e8 ;unit conversion, like the inner disk radius is 10^8 cm
-lum38=3. ;luminosity in units of 10^{38} erg/s, 3 is an appropriate number for SMC X-1 per Brumback et al. 2020
+lum38=3. ;luminosity in units of 10^{38} erg/s
 icnt=0 ;starting the index of how many parameters files we're saved off at zero
 
 openw,4,topdir+'params.txt' ;this is going to be a .txt file that contains a giant list of all simulations you've created
@@ -152,9 +151,9 @@ for ibm2=0,n_elements(beamangdeg2)-1 do begin ;likewise for (latitude) beam angl
         printf,2,'tiltout='+string(tiltout) ;outer disk tilt
         printf,2,'phsoff='+string(phsoff) ;phase offset between inner and outer--- nesting of for loops does not work the same was as Python--- until 'endfor' is written, the loop is still running regardless of indentation
         printf,2,'npoints='+string(npoints) ;number of disk increments
-        printf,2,'nprof='+string(nprof) ;same number as above... unclear how this is different
-        printf,2,'nth='+string(nth) ;also unclear how this is different to npoints
-        printf,2,'nphi='+string(nphi) ;also unclear how this is different to npoints
+        printf,2,'nprof='+string(nprof) 
+        printf,2,'nth='+string(nth) 
+        printf,2,'nphi='+string(nphi) 
         printf,2,''  ;enter
     
 ;beam rotation angles
@@ -186,18 +185,17 @@ for ibm2=0,n_elements(beamangdeg2)-1 do begin ;likewise for (latitude) beam angl
 
         save,rin,rout,tiltin,tiltout,phsoff,npoints,nprof,nth,nphi,$
              nang,long1,lat1,long2,lat2,sigma1,sigma2,th1,th2,norm1,norm2,floor,$
-             rinphys,lum38,obselev,filename=dirname+'/par.idl' ;save all of these variable values in to the par.idl file (not readable to us, but they are in there)
+             rinphys,lum38,obselev,filename=dirname+'/par.idl' ;save all of these variable values in to the par.idl file 
              ; one par.idl file created in each experiment directory for each time this runs
-             ; i believe this creates the save file in question if it does not already exist...
+             ; this creates the save file in question if it does not already exist
              ; then if you later write 'restore, par.idl' you should be able to restore the values of the all of these variables to whatever was saved
-             ; you can also save procedures and restore them in a similar fashion, tho it may or may not overwrite you existing code when you do
 
         icnt=icnt+1 ;this is an index to say how many interations of the making a directory for each set of parameters we have overall
         ;so if we made 2 new directories, the first one would be labeled '000' and the second would be '001', etc.
         
-    endfor
 endfor
-    endfor ;so in theory none of these indentations are necessary
+endfor
+endfor 
 endfor
 endfor
 endfor
