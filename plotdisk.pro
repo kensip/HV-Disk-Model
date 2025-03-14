@@ -1,6 +1,6 @@
 pro plotdisk,bdir
 
-;this code was originally in dtmpspec.pro, I moved it out into another file
+;this code was originally part of dtmpspec.pro, I moved it out into another file
 ;Comments by KIS 2024
 
 spawn,'ls '+bdir,dlist1 ;topdir was a directory set in fit_inp pro
