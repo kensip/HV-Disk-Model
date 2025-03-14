@@ -23,7 +23,7 @@ nang=n_elements(xv[*,0]) ;set nang (# disk phis) to be the number of rows (phis)
 nprof=n_elements(xv[0,*]) ;likewise for nprof
 
 ;this is an array to hold the observed flux from each part of the disk
-intens=fltarr(nang,nprof) ;array of float zeros with size 100 x 100 or 128 x100 or something
+intens=fltarr(nang,nprof) ;array of float zeros with size 100 x 100 or 128 x100
 
 
 ;make the array to hold the energy and spectral info
@@ -38,7 +38,7 @@ keV=1.6021E-9 ;keV to ergs conversion factor
 
 
 Tclrmin=100.
-;this is for the color maps i believe
+;this is for the color maps
 Tclrmax=255.
 
 clrdisk=Tclrmax
@@ -64,7 +64,7 @@ for i =0,nang-1 do begin ;for each disk phi (not just 8 of them, the whole thing
 
 endfor
 
-xin=fltarr(nang) ;array of float zeros with size 100 or something
+xin=fltarr(nang) ;array of float zeros with size 100
 xout=xin ;likewise
 yin=xin ;likewise
 
@@ -120,7 +120,7 @@ if diskv eq 'y' then begin ;if we do not have disk viewing info saved yet (which
             vec2=fltarr(3) ;likewise
             
             vec1[0]=xv2[i,jnds[1]]-xv2[i,jnds[0]] ;the x component of the first vector is the disk x-component just after the current one, minus the component just after
-            ;(creating a little delta x of sorts)... we also did this before! in disktemp.pro
+            ;(creating a little delta x of sorts)... we also did this before in disktemp.pro
             vec1[1]=yv2[i,jnds[1]]-yv2[i,jnds[0]] ;likewise for the y component of vec1
 
             vec1[2]=zv2[i,jnds[1]]-zv2[i,jnds[0]] ;and the z component
@@ -134,7 +134,7 @@ if diskv eq 'y' then begin ;if we do not have disk viewing info saved yet (which
             ;so this represents the direction this area segment of the disk is emitting light towards
     
             top[i,j]=fix(orient[0]/abs(orient[0])) ;dividing the value of the x-component of orient by the absolute value of the x-component gives us either +1 or -1
-            ;so the array 'top' will have the value +1 for every part , and -1 for every bottom-illuminated portion of the disk
+            ;so the array 'top' will have the value +1 for every top-illuminated portion, and -1 for every bottom-illuminated portion of the disk
             ;since the x-component represents whether orient is facing away from or towards the observer--- i.e. top or bottom of the disk is emitting/ absorbing light
             ;the fix rounds down to an integer, so just making sure it definitely comes out as +-1 and not like 0.99999
             
@@ -164,8 +164,8 @@ if diskv eq 'y' then begin ;if we do not have disk viewing info saved yet (which
     ;iplot tells us again which parts of the disk are visible
 
     ;save the results of the visibility analysis
-    save,iplot,see,fsee,filename=diskvf ;saving the plot, the array 'see' the final value of fsee for reasons unbeknownst to me
-    ;and putting it in the disk viewing info info diskvf we've heard so much about
+    save,iplot,see,fsee,filename=diskvf ;saving the plot, the array 'see' the final value of fsee
+    ;and putting it in the disk viewing info into diskvf
     ;so this diskvf can be reused once it exists/ doesn't need to be rewritten every time (if diskv = 'n')
     print,'Created disk viewing file'
 
@@ -186,13 +186,13 @@ intot=total(intens[where(iplot+see eq 2)]) ;total intensity for all the points w
 
 
 ;define the intotx variable
-intotx=0.D ;this is equal to 0., the D means its a double precision float
+intotx=0.D ;this is equal to 0., the D means it's a double precision float
 ;meaning that IDL will remember it to more places (like 15 or 16 decimal places) than if it was a normal float (which would have like 7 or 8 decimal places)
 ;useful when we need a very precise value for a certain thing
 
 ;this runs the fast version, not saving spectral information
 ;but simply soft X-ray output
-if fast eq 'y' then begin ;need to run this one bc otherwise the fact that my bbnorm doesn't work right will probably become an issue
+if fast eq 'y' then begin ;can be used for general purposes
 
 
 bbfracgrid='bbfrac/bbf     0.300000_      10.00001101.idl'  ;the file i generated using bbfrac.pro
@@ -209,7 +209,6 @@ restore,bbfracgrid ;pulling parameters from the file named above
  
                 intotx=intotx+intens[i,j]*bbfrac_inp(logT,bbfracv,T[i,j]) ;add the intensity times the function bbfrac_inp, which is defined in file bbfrac_inp.pro
                 ;note that bc its a function not a procedure, it's written like fcn(variable1, variable2, ...) and will output one defined value
-                ;unlike the procedures we've been using this far
                 ; bbfrac_inp returns the fraction of the blackbody spectrum that is between two given energies (in this case 0.3 keV and 10 keV, see bbfracgrid file we restored above)
                 ; so multiplying total intensity by that gives us intensity of each point on this disk within the desired energy range
                 
@@ -247,8 +246,8 @@ for i=0,nang-1 do begin ;for each disk phi
     endfor    
 endfor
 
-xlo=0.3 ;a minimum energy
-xhi=1.0 ;a maximum energy
+xlo=0.3 ;a minimum energy (for the disk)
+xhi=1.0 ;a maximum energy (for the disk)
 endiff=diff(en) ;subtract subsequent elements of en from each other to create an approximate dE
 spectot=total(spec[0:n_elements(spec)-2]*endiff) ;total intensity integrated over energies (summed for all points on this disk)
 ix=where(en ge xlo and en lt xhi) ;indices where the energies in en are between xlo and xhi
