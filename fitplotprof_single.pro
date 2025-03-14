@@ -2,6 +2,7 @@
 ;A plotting routine to compliment fitplotprof_new where each profile is plotted in its 
 ;own window -> this allows for easier comparison to observed pulse profiles
 ;This will produce 8 plots!!
+; some comments added by KIS 2024
 pro fitplotprof_single,bdir,eraseit,plotpps
 
 get_lun, lun ;open a file and assign it a LUN (logical unit number)
@@ -33,7 +34,7 @@ for i=0,nang-1 do begin ;for each disk phi
 	;including inrep,inrepx,instar
 	;inrep is total intensity of points on the disk we can see
 	;inrepx is the same thing but only within the energy range specified
-	;instar is something about the beam/ star brightness
+	;instar is NS brightness
 
  	;this ERASES the diskvf.idl file (to save space)
  	if eraseit eq 'y' then begin
@@ -45,8 +46,8 @@ for i=0,nang-1 do begin ;for each disk phi
 
 ;figure out the offset for the plot
 	offsi=where(instar eq max(instar)) ;find index where we have max beam brightness
-	offs[i]=offsi[0]-19 ;each integer counting up to 8 now has the value of whatever index was the brightest, minus 19...
-	;something about changing the phase offsets to match btwn profiles
+	offs[i]=offsi[0]-19 ;each integer counting up to 8 now has the value of whatever index was the brightest, minus 19
+	;changing the phase offsets to match btwn profiles
 	if offs[i] lt 0 then begin
    		print,'going negative!'+string(offs[i])
    		offs[i]=ntemps+offs[i] ;flip the phasees back around to be positive
@@ -75,7 +76,7 @@ for i=0,nang-1 do begin ;for each disk phi
 	print, strang[i]
 	for j=0,ndat-1 do begin
 		printf, lun, strtrim(string(x2[j]),2) + ',' + strtrim(string(ystar2[j]),2) + ',' + strtrim(string(yrep2[j]),2)
-		;print into the file, 'disk phase', 'normalized brightness of the star', 'normalized brightness of the disk
+		;print into the file, 'disk phase', 'normalized brightness of the star', 'normalized brightness of the disk'
 	endfor    
   	free_lun, lun
   	close, lun
