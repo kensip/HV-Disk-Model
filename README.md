@@ -52,6 +52,8 @@ Save the file, then compile and run this procedure using the following script:
 
 ```.run fit_inp.pro```
 
+Running fit_inp.pro multiple times with the same set of input parameters will _not_ overwrite any already-run simulations with those parameters.
+
 # Running the Simulation
 The simulation is run via the fit_run.pro file. The model parameters must already be set (via compiling and running fit_inp.pro within the same IDL session) before running this file. Run as follows:
 
@@ -67,9 +69,9 @@ If you have elected to plot the accretion disk geometry in IDL, the simulation w
 
 If IDL is terminated while running a simulation: before starting again be sure to go into the folder of the simulation that was partially completed, and delete the file 'diskbeam.idl'. The existence of this file in a given folder (with its particular parameters in the folder name) is how fit_run.pro determines whether the simulation has been run already, so it will leave that simulation incomplete unless you delete this file. Then restart IDL, and compile and run fit_inp.pro and fit_run.pro again as usual.
 
-If you wish to re-run a particular simulation: go into the folder and delete the 'diskbeam.idl' file, then run fit_run.pro as usual. Alternatively, you can go into fit_run.pro and comment out the line defining 'dlist', and instead just define it as a particular folder or a list of folders.
+If you wish to re-run all simulations: go into fit_run.pro and comment out the line that defines 'ranalready', and comment in the line below that says ranalready=''. This will now re-run all simulations in your 'topdir' folder.
 
-If you wish to re-run all simulations: go into fit_run.pro and comment out the line that defines 'ranalready', and comment in the line below that says 'ranalready='''. This will now re-run all simulations in your folder.
+If you wish to re-run particular simulations: go into the simulation output folders and delete 'diskbeam.idl' files, then run fit_run.pro as usual. Alternatively, you can go into fit_run.pro and comment out the line defining 'dlist', and instead just define 'dlist' as a particular folder or a list of folders, then comment out of the line that defines 'ranalready' and set ranalready='', so fit_run.pro will re-run these.
 
 # Plotting Pulse Profiles in Python
 The file fitplotprof_single.pro generates a .csv file of the hard and soft X-ray model pulse profile at each disk phase (8 pulse profiles total per model run). These files are outputted into each simulation folder, under the sub-folders 'diskphi_0.000', 'diskphi_0.125', etc. They can be plotted in Python like any .csv file and compared to data.
