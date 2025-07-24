@@ -180,7 +180,7 @@ for ibm2=0,n_elements(beamangdeg2)-1 do begin ;likewise for (latitude) beam angl
 
         close,2
 
-        printf,4,"perm"+string(icnt)+string(lat1)+","+string(lat2)+","+string(long2)+","+string(th1)+","+string(phsoff)+","+string(tiltin)+","+string(tiltout)
+        printf,4,"perm"+string(icnt)+","+string(lat1)+","+string(lat2)+","+string(long2)+","+string(th1)+","+string(phsoff)+","+string(tiltin)+","+string(tiltout)
         ;including relevant info in our big params.txt file
 
         save,rin,rout,tiltin,tiltout,phsoff,npoints,nprof,nth,nphi,$
