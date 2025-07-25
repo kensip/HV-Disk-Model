@@ -57,7 +57,7 @@ Tmin=1.e20
 
 for k=0,ntemps-1 do begin ;for each of the beam rotation increments/ resulting temp profiles (i believe they are not additive, its just a discrete profile for each beam rotation position)
 
-    restore,bdir+'dtemp_'+`${k,'%3.3I'}`+'.idl' ;restore the temperature profile info saved in all these many files
+    restore,bdir+'dtemp_'+string(k,format='%3.3I')+'.idl' ;restore the temperature profile info saved in all these many files
     ;including parameters: ph,illum,xv,yv,zv,labs,T,side
     
     Tmin1=min(T[where(T gt 0.)]) ;set Tmin1 to be the lowest positive T value
@@ -98,11 +98,11 @@ loadct,3 ;loading the same colormap again
 
     for j=0,ntemps-1 do begin ;for each temperature profile
         ;this loads the beam profiles for this beam angle
-        restore,bdir+'dtemp_'+`${j,'%3.3I'}`+'.idl' ;restore parameters for each beam position
+        restore,bdir+'dtemp_'+string(j,format='%3.3I')+'.idl' ;restore parameters for each beam position
         ;including parameters: ph,illum,xv,yv,zv,labs,T,side
         
 
-        print,'   beam angle no. '+`${j,'%3.3I'}`+'/'+`${ntemps,'%3.3I'}` ;so this will be like we're at beam angle 1/128, 2/128, etc.
+        print,'   beam angle no. '+string(j,format='%3.3I')+'/'+string(ntemps,format='%3.3I') ;so this will be like we're at beam angle 1/128, 2/128, etc.
 
                                 ;find what the observer sees of the
                                 ;beam.  We have to rotate the beam
@@ -149,7 +149,7 @@ loadct,3 ;loading the same colormap again
         ;so now intotx is the total intensity we see in the given energy range across visible areas of the whole disk
 
         if fast ne 'y' then begin
-        save,en,spec,filename=bdir+'diskphi_'+strang[i]+'/spec_'+`${j,'%3.3I'}`+'.idl'
+        save,en,spec,filename=bdir+'diskphi_'+strang[i]+'/spec_'+string(j,format='%3.3I')+'.idl'
     endif
 
     endfor
