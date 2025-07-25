@@ -79,7 +79,7 @@ disktemp,params,npoints,nprof,rinphys,thbeam,phbeam,illum,ph,xv,yv,zv,labs,T,sid
 
 ;xv, yv, zv were defined in 'beam' procedure
 ;rest not seen here should be defined within the disktemp procedure
-save,ph,illum,xv,yv,zv,labs,T,side,filename=bdir+'dtemp_'+`${j,'%3.3I'}`+'.idl'
+save,ph,illum,xv,yv,zv,labs,T,side,filename=bdir+'dtemp_'+string(j,format='%3.3I')+'.idl'
 ;saving some variables resulting from the running of 'disktemp' to another file, named after the interval of beam rotation that we're on rn
 
 ;put the emitted luminosity in the vector
