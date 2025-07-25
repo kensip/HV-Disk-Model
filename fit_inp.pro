@@ -88,30 +88,30 @@ openw,4,topdir+'params.txt' ;this is going to be a .txt file that contains a gia
 for iobs=0,n_elements(obselevdeg)-1 do begin ;for however many obselevv's have been specified (potentially an array of them to be tested)
     obselev=obselevdeg[iobs] ;select each value from the array
     if obselev lt 0 then begin ; if the phase offset angle is negative
-        strobs=`obsm${-obselevdeg[iobs],'%2.2I'}` ;creates a string like 'obsm100', the m indicating that its Minus 100
+        strobs='obsm'+string(-obselevdeg[iobs],format='%2.2I') ;creates a string like 'obsm100', the m indicating that its Minus 100
     endif else begin ;otherwise
-       strobs=`obs${obselevdeg[iobs],'%2.2I'}` ;create this string which is obs plus the string form of the obselev angle rounded to 2 digits, so like 'obs05'
+       strobs='obs'+string(obselevdeg[iobs],format='%2.2I') ;create this string which is obs plus the string form of the obselev angle rounded to 2 digits, so like 'obs05'
     endelse
 
 for itin=0,n_elements(tiltindeg)-1 do begin ; likewise for inner disk tilt angles
     tiltin=tiltindeg[itin]
-    strtin=`tin${tiltindeg[itin],'%2.2I'}` ; creates a string like 'tin10'
+    strtin='tin'+string(tiltindeg[itin],format='%2.2I') ; creates a string like 'tin10'
 
 for itout=0,n_elements(tiltoutdeg)-1 do begin ;likewise for outer disk tilt angles
     tiltout=tiltoutdeg[itout]
-    strtout=`tout${tiltoutdeg[itout],'%2.2I'}` ;creates a string like 'tout30'
+    strtout='tout'+string(tiltoutdeg[itout],format='%2.2I') ;creates a string like 'tout30'
 
 for ith=0,n_elements(thvdeg)-1 do begin ;likewise for opening angle of beams
     th1=thvdeg[ith]
     th2=th1 ;the first and second beams are assumed to have the same opening angle in all cases
-    strth=`th${thvdeg[ith],'%2.2I'}` ;creates a string like 'th00'
+    strth='th'+string(thvdeg[ith],format='%2.2I') ;creates a string like 'th00'
 
 for i=0,n_elements(phsoffvdeg)-1 do begin  ; likewise for phase offset angles
            phsoff=phsoffvdeg[i]
         if phsoff lt 0 then begin ; if the phase offset angle is negative
-            strphs=`twm${-phsoffvdeg[i],'%3.3I'}` ;creates a string like 'twm100', the m indicating that its Minus 100
+            strphs='twm'+string(-phsoffvdeg[i],format='%3.3I') ;creates a string like 'twm100', the m indicating that its Minus 100
         endif else begin ;otherwise
-           strphs=`tw${phsoffvdeg[i],'%3.3I'}` ;creates a string like 'tw139' for positive angles
+           strphs='tw'+string(phsoffvdeg[i],format='%3.3I') ;creates a string like 'tw139' for positive angles
          endelse
 
 for ibm1=0,n_elements(beamangdeg1)-1 do begin ;this is like cycling through the beamang1 values still, formatting is just crazy
@@ -124,11 +124,11 @@ for ibm2=0,n_elements(beamangdeg2)-1 do begin ;likewise for (latitude) beam angl
 
         if beamangdeg1[ibm1] lt 0 then bm1str='m' else bm1str='_' ;if beam angle 1 is negative then add the 'm' string to the final phrase, otherwise have an underscore in place of the m
         if beamangdeg2[ibm2] lt 0 then bm2str='m' else bm2str='_' ;likewise for beam angle 2
-        strbm='bm1'+bm1str+`${abs(beamangdeg1[ibm1]),'%2.2I'}`+'bm2'+bm2str+`${abs(beamangdeg2[ibm2]),'%2.2I'}` ;creates a string like 'bm1_00bm2_60' (if both are positive)
+        strbm='bm1'+bm1str+string(abs(beamangdeg1[ibm1]),format='%2.2I')+'bm2'+bm2str+string(abs(beamangdeg2[ibm2]),format='%2.2I') ;creates a string like 'bm1_00bm2_60' (if both are positive)
 
         for ilng=0,n_elements(long2vdeg)-1 do begin ;likewise for longitude angles of beams
             long2=long2vdeg[ilng] ;only identifying the second beam's longitude angle, since its relative to the first beam
-            strlng=`lng${long2vdeg[ilng],'%3.3I'}` ;creates a string like 'lng210'
+            strlng='lng'+string(long2vdeg[ilng],format='%3.3I') ;creates a string like 'lng210'
 
 
         dirname=topdir+strobs+strtin+strtout+strphs+strth+strbm+strlng ;setting the name of the directory to be all of these variable strings smushed together
