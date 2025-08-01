@@ -93,6 +93,6 @@ under your desired 'source' name. The source names can be changed, those are jus
 3. Your desired save location and save file name for plots. This is located in the fig.savefig command under "if save=='y':", and should be set like so:
 ```fig.savefig('/path/I/want/to/save/to/filename.png')```
 I have my filename set to use an inputted figure title, and to automatically include today's date. It will need to be changed twice, once in the segment of code for plotting all disk positions, and again in the segment of code for plotting just one disk position.
-4. The observer elevation, if yours is not $20^o$. This should be changed in the variable 'foldername'. 
+4. The observer elevation, if yours is not $20^o$. This should be changed in the variable 'foldername'--- i.e. 'obs20' becomes 'obs40' if you used an observer elevation of $40^o$.
 
 Further details on inputs for the plotting function in Python are noted within the Python notebook file.
