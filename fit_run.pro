@@ -35,6 +35,7 @@ ranalready=file_which(dname,'diskbeam.idl') ;diskbeam.idl is produced into the d
 
 endit:
 
+if ranalready eq '' then begin
 plotalready = file_which(dname,'diskphi_0.875/simpp_0.875.csv') ;determine whether we already have .csv files of pulse profs
 if plotalready eq '' then begin
     eraseit='y' ;to erase diskvf later to save space
@@ -50,6 +51,7 @@ if plotd eq 'y' then begin
     endif else begin
         plotdisk,dname ;plot the disk
     endelse
+endif
 endif
 
 
