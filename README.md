@@ -81,7 +81,9 @@ The information needed to plot the disk is stored in the 'diskplotpar_0.000.idl'
 
 ```.compile convertidltotxt.pro```
 
-```.run convertidltotxt.pro```
+```convertidltotx,bdir```
+
+You may need to redefine the variable 'bdir', which should be the same as the variable 'topdir' from fit_inp.pro--- the path to the folder the simulation output is saved to.
 
 Then, use the Python notebook included to plot the disk. Within this file, be sure to change:
 1. The path to your params.txt file, which lists all the simulations you have run. It is overwritten every time you run fit_inp.pro, so for a large batch of simulations it is best to run them all at once and save a copy of the resulting params.txt elsewhere. 
