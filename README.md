@@ -86,8 +86,9 @@ The information needed to plot the disk is stored in the 'diskplotpar_0.000.idl'
 You may need to redefine the variable 'bdir', which should be the same as the variable 'topdir' from fit_inp.pro--- the path to the folder the simulation output is saved to.
 
 Then, use the Python notebook included to plot the disk. Within this file, be sure to change:
-1. The path to your params.txt file, which lists all the simulations you have run. It is overwritten every time you run fit_inp.pro, so for a large batch of simulations it is best to run them all at once and save a copy of the resulting params.txt elsewhere. 
-2. Your desired save location/ save file name for plots. It will need to be changed twice, once in the segment of code for plotting all disk positions, and again in the segment of code for plotting just one disk position.
-3. The observer elevation, if yours is not $20^o$. This should be changed in the variable 'foldername'.
+1. The path to your params.txt file, which lists all the simulations you have run. It is overwritten every time you run fit_inp.pro, so for a large batch of simulations it is best to run them all at once and save a copy of the resulting params.txt elsewhere. This is in the variable 'files', located in the first block of code under the plotdisk function. The path needs to be set like so: 'files=pd.read_csv("/path/to/params.txt",sep=',')' under your desired 'source' name. The source names can be changed, those are just telling the plotdisk function which params.txt file to draw from.
+2. The path to the output folder where all of your simulation folders are located. This is the variable called 'path'.
+3. Your desired save location and save file name for plots. This is located in the fig.savefig command under "if save=='y':". It will need to be changed twice, once in the segment of code for plotting all disk positions, and again in the segment of code for plotting just one disk position.
+4. The observer elevation, if yours is not $20^o$. This should be changed in the variable 'foldername'. 
 
 Further details on inputs for the plotting function in Python are noted within the Python notebook file.
