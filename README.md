@@ -81,7 +81,7 @@ The information needed to plot the disk is stored in the 'diskplotpar_0.000.idl'
 
 ```.compile convertidltotxt.pro```
 
-```convertidltotx,bdir```
+```convertidltotxt,bdir```
 
 You may need to redefine the variable 'bdir', which should be the same as the variable 'topdir' from fit_inp.pro--- the path to the folder the simulation output is saved to.
 
