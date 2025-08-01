@@ -81,6 +81,7 @@ icnt=0 ;starting the index of how many parameters files we're saved off at zero
 
 openw,4,topdir+'params.txt' ;this is going to be a .txt file that contains a giant list of all simulations you've created
 ;useful for if you're running many simulations over a large parameter space and need to reference them later
+printf,4,'NAME,BEAM1LAT,BEAM2LAT,BEAM2LONG,OPENINGANGLE,TWIST,TILTIN,TILTOUT' ;column headers for reading this as a csv in Python later
 
 ;go through the disk twists and the beam angles and all the other
 ;parameters, and make directories
